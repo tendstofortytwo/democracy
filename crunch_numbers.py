@@ -24,19 +24,15 @@ def main():
 						candidates[candidate] = Candidate(candidate)
 					ballot.append({ "candidate": candidates[candidate], "rank": rank })
 			ballots.append(list(map(lambda v: v["candidate"], sorted(ballot, key=lambda v: v["rank"]))))
-		for c in candidates:
-			print(f"candidate detected: {c}")
-		print(f"found {len(ballots)} ballots")
 
-		for b in ballots:
-			for c in b:
-				print(f"{c}: {type(c)}")
+	candidates = candidates.values()
+	ballots = list(map(lambda b: Ballot(ranked_candidates=b), ballots))
 
-		prepared_ballots = list(map(lambda b: Ballot(ranked_candidates=b), ballots))
+	print(f"found {len(ballots)} ballots and {len(candidates)} candidates")
 
-		election_result = pyrankvote.instant_runoff_voting(candidates, prepared_ballots)
+	election_result = pyrankvote.instant_runoff_voting(candidates, ballots)
 
-		print(election_result)
+	print(election_result)
 
 if __name__ == "__main__":
 	main()
