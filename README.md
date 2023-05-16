@@ -12,6 +12,7 @@
 git clone https://github.com/tendstofortytwo/democracy
 cd democracy
 python3 -m venv venv
+source venv/bin/activate
 pip3 -r requirements.txt
 ```
 
