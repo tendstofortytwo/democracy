@@ -36,7 +36,10 @@ def main():
 
 	print(f"found {len(ballots)} ballots and {len(candidates)} candidates")
 
-	election_result = pyrankvote.single_transferable_vote(candidates, ballots, number_of_seats=seat_count)
+	if seat_count == 1:
+		election_result = pyrankvote.instant_runoff_voting(candidates, ballots)
+	else:
+		election_result = pyrankvote.single_transferable_vote(candidates, ballots, number_of_seats=seat_count)
 
 	print(election_result)
 
